@@ -5,5 +5,3 @@ class eleve {
     private ?float $moyenne;
     private int $note;
 }
-
-
