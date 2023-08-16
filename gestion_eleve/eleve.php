@@ -4,20 +4,14 @@ class eleve {
     private array $listNote;
     private ?float $moyenne;
     private int $note; 
-    public function __construct($nom, $listNote , $moyenne , $note ) {
-        $this -> nom = readline("Veuillez entrer le nom de l'élève : ");
-        $this -> listNote = [];
-        $i = 1;
-
-        $nombreDeNotes = readline("Combien de notes : ");
-        while ($i <= $nombreDeNotes) {
-            $note = readline("Veuillez insérer la note numéro " . $i . " : ");
-            array_push($listNote, $note);
-            $i++;
-        }
-        $moyenne = array_sum($listNote)/$nombreDeNotes;
+    private int $nombreDeNotes; 
+    public function __construct($nom, $listNote , $moyenne , $note, $nombreDeNotes ) {
+        $this -> nom = $nom ;
+        $this -> listNote = $listNote;
+        $this -> moyenne = $moyenne;
+        $this -> note = $note;
+        $this -> nombreDeNotes = $nombreDeNotes;
     }
-
     /**
      * Get the value of nom
      *
@@ -110,6 +104,30 @@ class eleve {
     public function setNote(int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombreDeNotes
+     *
+     * @return int
+     */
+    public function getNombreDeNotes(): int
+    {
+        return $this->nombreDeNotes;
+    }
+
+    /**
+     * Set the value of nombreDeNotes
+     *
+     * @param int $nombreDeNotes
+     *
+     * @return self
+     */
+    public function setNombreDeNotes(int $nombreDeNotes): self
+    {
+        $this->nombreDeNotes = $nombreDeNotes;
 
         return $this;
     }
