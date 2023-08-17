@@ -1,21 +1,23 @@
 <?php
-class eleve {
+class Eleve {
     private string $nom;
     private array $listNote;
     private ?float $moyenne;
-    private int $note; 
-    public function __construct($nom, $listNote , $moyenne , $note ) {
-        $this -> nom = readline("Veuillez entrer le nom de l'élève : ");
-        $this -> listNote = [];
+    private int $note;
+
+    public function __construct() {
+        $this->nom = readline("Veuillez entrer le nom de l'élève : ");
+        $this->listNote = [];
         $i = 1;
 
         $nombreDeNotes = readline("Combien de notes : ");
         while ($i <= $nombreDeNotes) {
-            $note = readline("Veuillez insérer la note numéro " . $i . " : ");
-            array_push($listNote, $note);
+            $note = (float) readline("Veuillez insérer la note numéro " . $i . " : ");
+            $this->listNote[] = $note;
             $i++;
         }
-        $moyenne = array_sum($listNote)/$nombreDeNotes;
+        $this->moyenne = array_sum($this->listNote) / $nombreDeNotes;
+        echo ($this->nom . " a une moyenne de " . $this->moyenne . " !");
     }
 
     /**
