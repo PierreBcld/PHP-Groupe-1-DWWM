@@ -130,4 +130,22 @@ class Eleve
             $this->moyenne = null;
         }
     }
+
+    
+    function enregistrerNotesFopen($notes, $fichier) {
+        if (!file_exists($fichier)){
+            fopen($fichier ,'x');
+            fclose($fichier);
+            $data = implode("\n", $notes);
+            $handle = fopen($fichier, 'w');
+            fwrite($handle, $data);
+            fclose($handle);
+        }else{
+            $data = implode("\n", $notes);
+            $handle = fopen($fichier, 'w');
+            fwrite($handle, $data);
+            fclose($handle);
+        }
+    }
+
 }

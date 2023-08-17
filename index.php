@@ -15,6 +15,7 @@ while ($saisirEleve === "y") {
         $ajoutNote = readline('Voulez-vous saisir une nouvelle note pour ' . $eleve->getNom() . ' ? (y|n) ');
     }
     $eleves[] = $eleve;
+    $enter_file -> enregistrerNotesFopen($eleves, 'notes.txt');
     $saisirEleve = readline("Voulez-vous créer un nouvel élève ? (y|n)");
 }
 foreach ($eleves as $eleve) {
