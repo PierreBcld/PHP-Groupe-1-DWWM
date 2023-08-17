@@ -1,17 +1,18 @@
 <?php
-class eleve {
+
+namespace gestionEleves;
+
+class Eleve
+{
     private string $nom;
-    private array $listNote;
+    private array $listeNotes;
     private ?float $moyenne;
-    private int $note; 
-    private int $nombreDeNotes; 
-    public function __construct($nom, $listNote , $moyenne , $note, $nombreDeNotes ) {
-        $this -> nom = $nom ;
-        $this -> listNote = $listNote;
-        $this -> moyenne = $moyenne;
-        $this -> note = $note;
-        $this -> nombreDeNotes = $nombreDeNotes;
+    private int $note;
+    public function __construct($nom)
+    {
+        $this->nom = $nom;
     }
+
     /**
      * Get the value of nom
      *
@@ -37,25 +38,25 @@ class eleve {
     }
 
     /**
-     * Get the value of listNote
+     * Get the value of listeNotes
      *
      * @return array
      */
-    public function getListNote(): array
+    public function getListeNotes(): array
     {
-        return $this->listNote;
+        return $this->listeNotes;
     }
 
     /**
-     * Set the value of listNote
+     * Set the value of listeNotes
      *
-     * @param array $listNote
+     * @param array $listeNotes
      *
      * @return self
      */
-    public function setListNote(array $listNote): self
+    public function setListeNotes(array $listeNotes): self
     {
-        $this->listNote = $listNote;
+        $this->listeNotes = $listeNotes;
 
         return $this;
     }
@@ -63,9 +64,9 @@ class eleve {
     /**
      * Get the value of moyenne
      *
-     * @return ?float
+     * @return float
      */
-    public function getMoyenne(): ?float
+    public function getMoyenne(): float
     {
         return $this->moyenne;
     }
@@ -73,11 +74,11 @@ class eleve {
     /**
      * Set the value of moyenne
      *
-     * @param ?float $moyenne
+     * @param float $moyenne
      *
      * @return self
      */
-    public function setMoyenne(?float $moyenne): self
+    public function setMoyenne(float $moyenne): self
     {
         $this->moyenne = $moyenne;
 
@@ -107,30 +108,26 @@ class eleve {
 
         return $this;
     }
-
-    /**
-     * Get the value of nombreDeNotes
-     *
-     * @return int
-     */
-    public function getNombreDeNotes(): int
+    public function __toString()
     {
-        return $this->nombreDeNotes;
+        return ($this->nom . " (" . number_format($this->moyenne, 2) . ")" . PHP_EOL);
     }
-
-    /**
-     * Set the value of nombreDeNotes
-     *
-     * @param int $nombreDeNotes
-     *
-     * @return self
-     */
-    public function setNombreDeNotes(int $nombreDeNotes): self
+    public function ajouterNote(int $note, array &$listeNotes, ?int &$moyenne = 0): void
     {
-        $this->nombreDeNotes = $nombreDeNotes;
-
-        return $this;
+        if ($note < 0) {
+            $listeNotes[] = 0;
+        } elseif ($note > 20) {
+            $listeNotes[] = 20;
+        } else {
+            $listeNotes[] = $note;
+        }
+        if (!empty($listeNotes)) {
+            foreach ($listeNotes as $notes) {
+                $moyenne = $moyenne + $notes;
+            }
+            $this->moyenne = number_format($moyenne, 2) / count($listeNotes);
+        } else {
+            $this->moyenne = null;
+        }
     }
 }
-
-
